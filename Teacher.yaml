@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Teachers
+  description: enseignants
+  version: 3.0.0
+
+paths:
+  /teachers:
+    get:
+      summary: La liste 
+      description: La liste complète 
+      responses:
+        "200":
+          description: Liste des enseignants
+          content:
+            application/json:
+              example:
+                teachers:
+                  - id: 0
+                    nom: RAMAROZAKA
+                    prenom: Tokimahery
+                    birthdate: 1995-12-11
+                    nomDuCours: Prog2
+                    dureeDuCours: 50
+    post:
+      summary: Nouvel 
+      description: nouvel enseignant à la liste.
+      requestBody:
+        description: Nouvel enseignant
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Teacher"
+      responses:
+        "201":
+          description: créé.
+        "400":
+          description: Erreur de validation.
+components:
+  schemas:
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: integer
+        nom:
+          type: string
+        prenom:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        nomDuCours:
+          type: string
+        dureeDuCours:
+          type: integer
+          description: Durée du cours en heure
